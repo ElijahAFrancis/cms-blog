@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS bytespace_db;
+CREATE DATABASE bytespace_db;

@@ -1,0 +1,25 @@
+<div class="row mb-4 project">
+    <div class="col-md-5">
+        <h2>
+            <a href="/project/{{blogpost.id}}">{{blogpost.title}}</a>
+        </h2>
+        <p>Commented by {{blogpost.user.name}} on {{format_date blogpost.date_created}}</p>
+    </div>
+    <div class="col-md-7">
+        <p>
+            {{blogpost.content}}
+        </p>
+    </div>
+</div>
+{{#each comments as |comment|}}
+<div class="row mb-4 project">
+    <div class="col-md-5">
+        <p>Commented by {{comment.user.name}} on {{format_date comment.date_created}}</p>
+    </div>
+    <div class="col-md-7">
+        <p>
+            {{comment.content}}
+        </p>
+    </div>
+</div>
+{{/each}}
