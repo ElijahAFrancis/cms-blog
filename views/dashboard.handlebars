@@ -1,3 +1,7 @@
+<div>
+  <button class="btn btn-primary" type="button" id="new-blogpost">Make a new post</button>
+</div>
+{{#if blogposts.length}}
 {{#each blogposts as |blogpost| }}
 <div class="row mb-4 project">
   <div class="col-md-5">
@@ -13,3 +17,11 @@
   </div>
 </div>
 {{/each}}
+{{else}}
+<div class="row mb-4 project">
+  <p>This is where I would keep your posts</p>
+  <h2>IF YOU HAD ANY!</h2>
+</div>
+{{/if}}
+
+<script src="./js/homepage.js"></script>
