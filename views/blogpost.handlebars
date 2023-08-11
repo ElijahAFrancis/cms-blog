@@ -1,9 +1,9 @@
 <div class="row mb-4 project">
     <div class="col-md-5">
         <h2>
-            <a href="/project/{{blogpost.id}}">{{blogpost.title}}</a>
+            <p>{{blogpost.title}}</p>
         </h2>
-        <p>Commented by {{blogpost.user.name}} on {{format_date blogpost.date_created}}</p>
+        <p>Posted by {{blogpost.user.username}}</p>
     </div>
     <div class="col-md-7">
         <p>
@@ -11,10 +11,10 @@
         </p>
     </div>
 </div>
-{{#each comments as |comment|}}
+{{#each blogpost.comments as |comment|}}
 <div class="row mb-4 project">
     <div class="col-md-5">
-        <p>Commented by {{comment.user.name}} on {{format_date comment.date_created}}</p>
+        <p>Commented by {{comment.user.username}}</p>
     </div>
     <div class="col-md-7">
         <p>
