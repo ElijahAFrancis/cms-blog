@@ -1,4 +1,4 @@
-<div class="row mb-4 project">
+<div class="row mb-4 blogpost">
     <div class="col-md-5">
         <h2>
             <p>{{blogpost.title}}</p>
@@ -11,8 +11,23 @@
         </p>
     </div>
 </div>
+
+<div class="col-md-6">
+    <h3>Leave a Comment</h3>
+
+    <form class="form new-comment-form">
+      <div class="form-group">
+        <input class="form-input" type="text" id="comment-content"/>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary" id="comment-btn" data-id="{{blogpost.id}}">Comment</button>
+      </div>
+    </form>
+</div>
+{{#if blogpost.comments.length}}
+<h4>Comments</h4>
 {{#each blogpost.comments as |comment|}}
-<div class="row mb-4 project">
+<div class="row mb-4 comment">
     <div class="col-md-5">
         <p>Commented by {{comment.user.username}}</p>
     </div>
@@ -23,3 +38,6 @@
     </div>
 </div>
 {{/each}}
+{{/if}}
+
+<script src="../js/blogpost.js"></script>

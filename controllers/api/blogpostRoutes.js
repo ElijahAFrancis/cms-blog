@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Blogpost } = require('../../models');
+const { Blogpost, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 router.post('/', withAuth, async (req, res) => {
@@ -15,6 +15,20 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
+router.post('/:id/comment', withAuth, async (req, res) => {
+  try {
+    const newComment = await Comment.create({
+      content: req.body.content,
+      blogpost_id: req.params.id,
+      user_id: req.session.user_id,
+    });
+
+    res.status(200).json(newComment);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
 router.delete('/:id', withAuth, async (req, res) => {
   try {
     const blogpostData = await Blogpost.destroy({
@@ -25,7 +39,7 @@ router.delete('/:id', withAuth, async (req, res) => {
     });
 
     if (!blogpostData) {
-      res.status(404).json({ message: 'No blog post found with this id!' });
+      res.status(404).json({ message: 'No post found with this id!' });
       return;
     }
 
