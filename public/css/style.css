@@ -1,2 +1,18 @@
+.blogpost-text {
+    background-color: grey;
+    padding: 1rem;
+    border-radius: 1rem;
+    border-style: solid;
+}
 
-      
+a {
+    text-decoration: none;
+}
+
+.comment {
+    background-color: grey;
+    padding: 1rem;
+    border-radius: 1rem;
+    border-style: solid;
+    width: 50%;
+}

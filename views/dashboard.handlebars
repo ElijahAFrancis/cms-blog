@@ -10,12 +10,12 @@
     </h2>
     <p>Posted by {{user.username}} on {{format_date blogpost.date_created}}</p>
   </div>
-  <div class="col-md-7">
-    <p>
+  <div class="row-md-7">
+    <p class="blogpost-text">
       {{blogpost.content}}
     </p>
   </div>
-    <div class="col-md-4">
+    <div class="row-md-4">
         <button class="btn btn-sm btn-danger delete-btn" data-id="{{blogpost.id}}">Delete</button>
     </div>
 </div>
