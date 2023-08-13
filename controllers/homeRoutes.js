@@ -40,7 +40,7 @@ router.get('/blogpost/:id', async (req, res) => {
             {
               model: User,
               attributes: ['username'],
-            }
+            },
           ]
         },
       ],
@@ -64,13 +64,23 @@ router.get('/dashboard', withAuth, async (req, res) => {
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      include: [{ model: Blogpost }],
+      include: [
+        { 
+          model: Blogpost,
+          include: [
+            {
+              model: User,
+              attributes: [ 'username' ]
+            }
+          ]
+        },
+      ],
     });
 
     const user = userData.get({ plain: true });
 
     res.render('dashboard', {
-      ...user,
+      user,
       logged_in: true
     });
   } catch (err) {
@@ -78,13 +88,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
   }
 });
 
-router.get('/newblogpost', (req, res) => {
-  // If the user is not already logged in, redirect the request to another route
-  if (!req.session.logged_in) {
-    res.redirect('/login');
-    return;
-  }
-
+router.get('/newblogpost', withAuth, (req, res) => {
   res.render('newblogpost');
 });
 
