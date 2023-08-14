@@ -15,6 +15,35 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
+router.get('/:id', withAuth, async (req, res) => {
+  try {
+    const blogpostData = await Blogpost.findByPk(req.params.id, {});
+
+    const blogpost = blogpostData.get({ plain: true });
+
+    res.status(200).json(blogpost)
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.put('/:id', withAuth, async (req, res) => {
+  try {
+    const updatedBlogpost = await Blogpost.update({
+      ...req.body,
+    },
+      {
+        where: {id: req.params.id,
+                user_id: req.session.user_id,
+        },
+    });
+
+    res.status(200).json(updatedBlogpost);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
 router.post('/:id/comment', withAuth, async (req, res) => {
   try {
     const newComment = await Comment.create({
